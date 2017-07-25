@@ -1,6 +1,3 @@
-using Requests
-import Requests: get,json
-
 type courseSchedule
   startTime :: String
   endTime :: String
