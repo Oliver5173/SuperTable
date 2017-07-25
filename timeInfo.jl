@@ -1,7 +1,6 @@
 type courseSchedule
   startTime :: String
   endTime :: String
-  roomNumber :: String
   days :: String
   sectionCode :: String
 end
@@ -13,6 +12,7 @@ type examSchedule
 end
 
 type course
+  courseName :: String
   class :: Array{courseSchedule}
   exam :: examSchedule
 end
@@ -33,7 +33,6 @@ function getCourseInfo(url)
     for i in 1 : length(json_info["courseSchedule"])
       class[i] = courseSchedule(json_info["courseSchedule"][i]["startTime"],
                               json_info["courseSchedule"][i]["endTime"],
-                              json_info["courseSchedule"][i]["roomNumber"],
                               json_info["courseSchedule"][i]["days"],
                               json_info["courseSchedule"][i]["sectionCode"])
     end
@@ -43,7 +42,7 @@ function getCourseInfo(url)
                           json_info["examSchedule"][1]["startDate"])
       return course(class,exam)
     end
-    return course(class,examSchedule("","",""))
+    return course(json_info["info"]["name"],class,examSchedule("","",""))
   catch
     return -1
   end
