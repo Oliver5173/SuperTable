@@ -1,5 +1,7 @@
 using Requests
 using JSON
+include("timeInfo.jl")
+import Requests:get,json
 
 courseAPI = "http://www.sfu.ca/bin/wcm/course-outlines?"
 
@@ -12,7 +14,10 @@ function get_API(inputLink,key)
   else
     link = string(inputLink,"/",key)
   end
-  println(link)
+  info = getCourseInfo(link)
+  if info != -1
+    println(info)
+  end
   res = get(link)
   jsonFile = JSON.parse(IOBuffer(res.data))
   for ele in jsonFile
@@ -23,5 +28,3 @@ function get_API(inputLink,key)
     end
   end
 end
-
-get_API(courseAPI,"")
