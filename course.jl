@@ -1,5 +1,7 @@
 using Requests
 using JSON
+include("timeInfo.jl")
+import Requests:get,json
 
 courseAPI = "http://www.sfu.ca/bin/wcm/course-outlines?"
 
