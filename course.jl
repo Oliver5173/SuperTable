@@ -14,6 +14,7 @@ function get_API(inputLink,key)
   else
     link = string(inputLink,"/",key)
   end
+  println(link)
   info = getCourseInfo(link)
   if info != -1
     println(info)
