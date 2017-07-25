@@ -8,7 +8,6 @@ function get_API(inputLink,key)
   if key == ""
     link = inputLink
   elseif inputLink == "http://www.sfu.ca/bin/wcm/course-outlines?"
-    println(1)
     link = string(inputLink,key)
   else
     link = string(inputLink,"/",key)
