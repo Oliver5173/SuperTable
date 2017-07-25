@@ -40,7 +40,7 @@ function getCourseInfo(url)
       exam = examSchedule(json_info["examSchedule"][1]["startTime"],
                           json_info["examSchedule"][1]["endTime"],
                           json_info["examSchedule"][1]["startDate"])
-      return course(class,exam)
+      return course(json_info["info"]["name"],class,exam)
     end
     return course(json_info["info"]["name"],class,examSchedule("","",""))
   catch
