@@ -1,28 +1,58 @@
 {% extends "base.html" %} {% block title %}Home{% endblock title %} {% block content %}
-<div class="container">
 
-    <div class="row">
-        <div class="col-md-2 content how">
-            Use?
-            <ul>
-                <li>1.</li>
-                <li>2.</li>
-                <li>3.</li>
-            </ul>
+<div class="row">
+    <div class="col-md-3 content how">
+        Use?
+        <ul>
+            <li>1.</li>
+            <li>2.</li>
+            <li>3.</li>
+        </ul>
+    </div>
+    <div class="col-md-6 search">
+        <br>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <select class="form-control">
+                        <option value="2017">2017</option>
+                        <option value="2018">2018</option>
+                    </select>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                <select class="form-control">
+                    <option value="spring">Spring</option>
+                    <option value="summer">Summer</option>
+                    <option value="fall">Fall</option>
+                    </select>
+            </div>
         </div>
-        <div class="col-md-1">
+        <br>
+        <div class="row">
+            <div class="col-md-3 col-md-offset-2">
+                <select class="form-control">
+                    <option value="cmpt">CMPT</option>
+                    <option value="cmns">CMNS</option>
+                    </select>
 
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                <select class="form-control">
+                    <option value="cmpt">CMPT</option>
+                    <option value="cmns">CMNS</option>
+                    </select> </div>
         </div>
-        <div class="col-md-5 content search">
-            Search
+        <br>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <button type="button" class="btn btn-success btn-lg btn-block">BUILD</button>
+            </div>
         </div>
-        <div class="col-md-1">
+    </div>
 
-        </div>
-        <div class="col-md-2 content suggestion">
-            HotCourse
-        </div>
-
+    <br>
+    <div class="col-md-3 content suggestion">
+        HotCourse
     </div>
 </div>
-{% endblock content %}
+
+<br> {% endblock content %}

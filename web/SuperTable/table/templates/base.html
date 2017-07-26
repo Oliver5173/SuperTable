@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
+    <link rel="icon" href="{% static 'pics/book.png'%}" type="image/x-icon" />
 </head>
 
 <body>
@@ -19,7 +20,22 @@
         <div>Default content</div>
         {% endblock content %}
     </div>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 support" id="pinkRed">
+                pinkRed
+            </div>
+            <div class="col-md-3 support" id="dailyUpdate">
+                dailyUpdate
+            </div>
+            <div class="col-md-3 support" id="darkBlue">
+                darkBlue
+            </div>
+            <div class="col-md-3 support" id="donation">
+                donation
+            </div>
+        </div>
+    </div>
     <footer class="footer">
         {% include "footer.html" %}
     </footer>
