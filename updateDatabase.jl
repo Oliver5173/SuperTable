@@ -10,15 +10,12 @@ function update_db(year,term)
   department_arr = getDepartment(year,term)
   db = SQLite.DB(string(year,term,".db"))
   for dep in department_arr
-    SQLite.query(db,"create table $(dep)(course TEXT,
-                                         section TEXT,
-                                         campus TEXT,
-                                         sectionCode TEXT,
-                                         startTime1 TEXT,endTime1 TEXT,days1 TEXT,
-                                         startTime2 TEXT,endTime2 TEXT,days2 TEXT,
-                                         startTime3 TEXT,endTime3 TEXT,days3 TEXT,
-                                         examStartTime TEXT,examEndTime TEXT,
-                                         examStartDate TEXT)")
+    SQLite.query(db,"create table $(dep)(course TEXT,section TEXT,
+                                         campus TEXT,sectionCode TEXT,
+                                         startTime1 TIME,endTime1 TIME,days1 TEXT,
+                                         startTime2 TIME,endTime2 TIME,days2 TEXT,
+                                         startTime3 TIME,endTime3 TIME,days3 TEXT,
+                                         examstartTime TIME,examEndTime TIME,examDate TEXT)")
   end
-  get_API(string(base_url,year,"/",term),"")
+  get_API(string(base_url,year,"/",term),"",db)
 end
