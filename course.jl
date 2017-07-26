@@ -1,4 +1,4 @@
-function get_API(inputLink,key)
+function get_API(inputLink,key,db)
   if key == ""
     link = inputLink
   elseif inputLink == "http://www.sfu.ca/bin/wcm/course-outlines?"
@@ -9,13 +9,37 @@ function get_API(inputLink,key)
   println(link)
   info = getCourseInfo(link)
   if info != -1
+    courseInfo = split(info.courseName," ")
+    tableName = string(lowercase(courseInfo[1]),"x")
+    if length(info.class) == 1
+      SQLite.query(db,"insert into $tableName values($(courseInfo[2]),$(courseInfo[3]),
+                                                     $(info.campus),$(info.class[1].sectionCode),
+                                                     $(info.class[1].startTime),$(info.class[1].endTime),$(info.class[1].days),
+                                                     NULL,NULL,NULL,
+                                                     NULL,NULL,NULL,
+                                                     $(info.exam.startTime),$(info.exam.endTime),$(info.exam.startDate))")
+    elseif length(info.class) == 2
+      SQLite.query(db,"insert into $tableName values($(courseInfo[2]),$(courseInfo[3]),
+                                                     $(info.campus),$(info.class[1].sectionCode),
+                                                     $(info.class[1].startTime),$(info.class[1].endTime),$(info.class[1].days),
+                                                     $(info.class[2].startTime),$(info.class[2].endTime),$(info.class[2].days),
+                                                     NULL,NULL,NULL,
+                                                     $(info.exam.startTime),$(info.exam.endTime),$(info.exam.startDate))")
+    elseif length(info.class) == 3
+      SQLite.query(db,"insert into $tableName values($(courseInfo[2]),$(courseInfo[3]),
+                                                     $(info.campus),$(info.class[1].sectionCode),
+                                                     $(info.class[1].startTime),$(info.class[1].endTime),$(info.class[1].days),
+                                                     $(info.class[2].startTime),$(info.class[2].endTime),$(info.class[2].days),
+                                                     $(info.class[3].startTime),$(info.class[3].endTime),$(info.class[3].days),
+                                                     $(info.exam.startTime),$(info.exam.endTime),$(info.exam.startDate))")
+    end
     println(info)
   end
   res = get(link)
   jsonFile = JSON.parse(IOBuffer(res.data))
   for ele in jsonFile
     try haskey(ele,"value")
-      get_API(link,ele["value"])
+      get_API(link,ele["value"],db)
     catch
       return ele
     end
