@@ -19,6 +19,6 @@ from table import views as table_view
 
 urlpatterns = [
     url(r'^$', table_view.index, name='home'),
-    url(r'^CourseSearch/(\d+)/([A-Za-z]+)/([A-Za-z]*\d*)/(\d+)$', table_view.get_course,name="get_course"),
+    url(r'^CourseSearch/(\d+)/([A-Za-z]+)/([A-Za-z]*\d*)/$', table_view.get_course,name="get_course"),
     url(r'^admin/', admin.site.urls),
 ]
