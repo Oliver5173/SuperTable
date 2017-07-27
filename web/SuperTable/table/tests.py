@@ -15,7 +15,6 @@ class IndexPageTest(TestCase):
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = index(request)
-        html = response.content.decode('utf8')
-        self.assertTrue(html.startswith('<html>'))
+        html = response.content.decode('UTF-8')
         self.assertIn('SuperTable</title>',html)
         self.assertTrue(html.endswith('</html>'))
