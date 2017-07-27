@@ -79,7 +79,7 @@ type course
   courseName :: String
   campus :: String
   class :: Array{courseSchedule}
-  exam :: examSchedule
+  exam :: Array{examSchedule}
 end
 
 function getCourseInfo(url)
@@ -100,9 +100,9 @@ function getCourseInfo(url)
                               json_info["courseSchedule"][i]["sectionCode"])
     end
     try
-      exam = examSchedule(json_info["examSchedule"][1]["startTime"],
-                          json_info["examSchedule"][1]["endTime"],
-                          json_info["examSchedule"][1]["startDate"])
+      exam = examSchedule(json_info["examSchedule"][end]["startTime"],
+                          json_info["examSchedule"][end]["endTime"],
+                          json_info["examSchedule"][end]["startDate"])
       return course(json_info["info"]["name"],json_info["courseSchedule"][1]["campus"],class,exam)
     end
     return course(json_info["info"]["name"],json_info["courseSchedule"][1]["campus"],class,examSchedule("","",""))
