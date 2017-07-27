@@ -79,7 +79,7 @@ type course
   courseName :: String
   campus :: String
   class :: Array{courseSchedule}
-  exam :: Array{examSchedule}
+  exam :: examSchedule
 end
 
 function getCourseInfo(url)
