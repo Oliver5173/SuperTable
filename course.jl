@@ -11,25 +11,28 @@ function get_API(inputLink,key,db)
   info = getCourseInfo(link)
   if info != -1
     println(length(info.class))
+    print_with_color(:red,string(link,"\n"))
     courseInfo = split(info.courseName," ")
     tableName = string(lowercase(courseInfo[1]),"x")
     examDate = split(info.exam.startDate," ")
-    examDate = string(examDate[1]," ",examDate[2]," ",examDate[3]," "examDate[6])
+    examstartTime = length(examDate) == 1 ? "NULL": info.exam.startTime
+    examEndTime = length(examDate) == 1 ? "NULL": info.exam.endTime
+    examDate = length(examDate) == 1 ? "NULL": string(examDate[1]," ",examDate[2]," ",examDate[3]," "examDate[6])
+    #=
+    SQLite.query(db,"create table $(dep)(course TEXT,section TEXT,
+                                         campus TEXT,sectionCode TEXT,
+                                         startTime1 TIME,endTime1 TIME,days1 TEXT,
+                                         startTime2 TIME,endTime2 TIME,days2 TEXT,
+                                         startTime3 TIME,endTime3 TIME,days3 TEXT,
+                                         examstartTime TIME,examEndTime TIME,examDate TEXT)")
+    =#
     if length(info.class) == 1
-      #=
-      SQLite.query(db,"create table $(dep)(course TEXT,section TEXT,
-                                           campus TEXT,sectionCode TEXT,
-                                           startTime1 TIME,endTime1 TIME,days1 TEXT,
-                                           startTime2 TIME,endTime2 TIME,days2 TEXT,
-                                           startTime3 TIME,endTime3 TIME,days3 TEXT,
-                                           examstartTime TIME,examEndTime TIME,examDate TEXT)")
-      =#
       SQLite.query(db,"insert into $tableName values('$(courseInfo[2])','$(courseInfo[3])',
                                                      '$(info.campus)','$(info.class[1].sectionCode)',
                                                      '$(info.class[1].startTime)','$(info.class[1].endTime)','$(info.class[1].days)',
                                                       NULL,NULL,NULL,
                                                       NULL,NULL,NULL,
-                                                     '$(info.exam.startTime)','$(info.exam.endTime)','$(examDate)')")
+                                                     '$(examstartTime)','$(examEndTime)','$(examDate)')")
     elseif length(info.class) == 2
       SQLite.query(db,"insert into $tableName values('$(courseInfo[2])','$(courseInfo[3])',
                                                      '$(info.campus)','$(info.class[1].sectionCode)',
