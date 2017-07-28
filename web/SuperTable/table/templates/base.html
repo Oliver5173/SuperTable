@@ -11,8 +11,12 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <link rel='stylesheet' type='text/css' href="{% static 'fullcalendar/dist/fullcalendar.css' %}" />
+    <script type='text/javascript' src="{% static 'moment/moment.js' %}"></script>
+    <script type='text/javascript' src="{% static 'fullcalendar/dist/fullcalendar.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <script src="{% static 'js/general.js' %}"></script>
+    {% block extra_head %} {% endblock extra_head %}
 </head>
 
 <body>

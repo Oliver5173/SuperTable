@@ -4,6 +4,14 @@ from django.db import models
 class SearchRequest(models.Model):
     year = models.IntegerField()
     semester = models.TextField()
+    courseInfo = models.TextField()
+
+    def __str__(self):
+        return self.courseInfo
+
+class SearchRequestModify(models.Model):
+    year = models.IntegerField()
+    semester = models.TextField()
     department = models.TextField()
     courseNum = models.IntegerField()
 
