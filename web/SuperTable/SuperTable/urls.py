@@ -24,7 +24,4 @@ urlpatterns = [
     url(r'^$', table_view.index, name='home'),
     url(r'^SearchResult/$', table_view.get_course,name="get_course"),
     url(r'^admin/', admin.site.urls),
-
-    url(r'^fullcalendar/', TemplateView.as_view(template_name="fullcalendar.html"), name='fullcalendar'),
-    url(r'^schedule/', include('schedule.urls'), name='scheduler'),
 ]
