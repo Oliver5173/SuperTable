@@ -1,3 +1,8 @@
 geckodriver download for open firefox selenium
 
 https://github.com/mozilla/geckodriver/releases
+
+
+Full Calendar:
+
+schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives'

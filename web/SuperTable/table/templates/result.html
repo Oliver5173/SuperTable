@@ -1,1 +1,90 @@
-{% extends "base.html" %} {% block title %}Result{% endblock title %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %}Result{% endblock title %} {% block extend-head %}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css">
+<link rel="stylesheet" href="{%static 'fullcalendar-scheduler/dist/scheduler.css' %}">
+<script src=" {%static 'moment/moment.js' %} ">
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js ">
+</script>
+<script src="{%static 'fullcalendar-scheduler/dist/scheduler.js' %} ">
+</script>
+<script>
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            defaultDate: '2017-07-12',
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            selectHelper: true,
+            select: function(start, end) {
+                var title = prompt('Event Title:');
+                var eventData;
+                if (title) {
+                    eventData = {
+                        title: title,
+                        start: start,
+                        end: end
+                    };
+                    $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+                }
+                $('#calendar').fullCalendar('unselect');
+            },
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: [{
+                title: 'All Day Event',
+                start: '2017-07-01'
+            }, {
+                title: 'Long Event',
+                start: '2017-07-07',
+                end: '2017-07-10'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2017-07-09T16:00:00'
+            }, {
+                id: 999,
+                title: 'Repeating Event',
+                start: '2017-07-16T16:00:00'
+            }, {
+                title: 'Conference',
+                start: '2017-07-11',
+                end: '2017-07-13'
+            }, {
+                title: 'Meeting',
+                start: '2017-07-12T10:30:00',
+                end: '2017-07-12T12:30:00'
+            }, {
+                title: 'Lunch',
+                start: '2017-07-12T12:00:00'
+            }, {
+                title: 'Meeting',
+                start: '2017-07-12T14:30:00'
+            }, {
+                title: 'Happy Hour',
+                start: '2017-07-12T17:30:00'
+            }, {
+                title: 'Dinner',
+                start: '2017-07-12T20:00:00'
+            }, {
+                title: 'Birthday Party',
+                start: '2017-07-13T07:00:00'
+            }, {
+                title: 'Click for Google',
+                url: 'http://google.com/',
+                start: '2017-07-28'
+            }]
+        });
+
+    });
+</script>
+{% endblock extend-head %} {% block content %}
+<div id='calendar' style="background-color:white; ">
+</div>
+
+{% endblock content %}
