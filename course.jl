@@ -1,3 +1,6 @@
+const base_url = "http://www.sfu.ca/bin/wcm/course-outlines?"
+
+
 function get_API(inputLink,key,db)
   if key == ""
     link = inputLink
@@ -113,6 +116,7 @@ end
 
 function getDepartment(year,term)
   department_info = json(get(string(base_url,year,"/",term)))
+  println(department_info)
   department_arr = Array{String}(0)
   #add "x" to avoid SQL keywords
   for i in department_info

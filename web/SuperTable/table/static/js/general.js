@@ -14,5 +14,6 @@ $(document).ready(function(){
     }
     $("#year").val(year.toString());
     $("#semester").val(semester);
+    $("#preference").val("All");
 
 });

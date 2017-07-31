@@ -6,7 +6,7 @@ import Requests:get,json
 
 const base_url = "http://www.sfu.ca/bin/wcm/course-outlines?"
 
-function update_db(year,term)
+function update_db(year,term="")
   department_arr = getDepartment(year,term)
   db = SQLite.DB(string(year,term,".db"))
   for dep in department_arr

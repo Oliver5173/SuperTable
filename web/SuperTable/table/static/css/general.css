@@ -61,3 +61,8 @@ footer {
     margin-right: auto;
     display: block;
 }
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}

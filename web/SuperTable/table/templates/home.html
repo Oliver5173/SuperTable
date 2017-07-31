@@ -35,17 +35,23 @@
                     <input type="text" class="form-control" name="courseList" placeholder="course;course;course;" required>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <select class="form-control" id="preference" name="preference" required>
+                    {% for preference in infoDict.preferenceList %}
+                        <option value="{{preference}}">{{preference}}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
             <br>
             <div class="row ">
-                <div class="col-md-3 col-md-offset-3 ">
+                <div class="col-md-4 col-md-offset-4">
                     <button type="submit" value="BUILD" class="btn btn-info btn-lg btn-block ">BUILD</button>
 
                 </div>
-                <!-- <div class="col-md-3 ">
-                <form action="" method="post ">{% csrf_token %}
-                    <button type="submit " value="RESET " class="btn btn-success btn-lg btn-block ">RESET</button>
-                </form>
-            </div> -->
             </div>
         </form>
     </div>
