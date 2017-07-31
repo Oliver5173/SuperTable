@@ -6,11 +6,39 @@
 </script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js ">
 </script>
-<!-- <script src="{%static 'fullcalendar-scheduler/dist/scheduler.js' %} "> -->
+<script src="{%static 'fullcalendar-scheduler/dist/scheduler.js' %} ">
 </script>
-<script src="{%static 'js/calendar.js'%}">
-</script>
+<!-- <script src="{%static 'js/calendar.js'%}">
+</script> -->
 
+<script>
+    var rtnDict = JSON.parse("{{ rtnDict|safe}}");
+    var eventsList = [];
+
+    for (var key in rtnDict) {
+        eventsList.push(rtnDict[key]);
+    };
+
+    $(document).ready(function() {
+
+        $('#calendar').fullCalendar({
+            schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            defaultView: 'agendaWeek',
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay,listWeek'
+            },
+            minTime: '08:00:00',
+            maxTime: '22:00:00',
+            slotDuration: '00:30:00',
+            navLinks: true, // can click day/week names to navigate views
+            editable: true,
+            eventLimit: true, // allow "more" link when too many events
+            events: eventsList,
+        });
+    });
+</script>
 
 {% endblock extend-head %} {% block content %}
 <div id='calendar' style="background-color:white;" class="fc fc-unthemed fc-ltr">
