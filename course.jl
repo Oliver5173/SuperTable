@@ -60,7 +60,7 @@ function get_API(inputLink,key,db)
   end
   res = get(link)
   jsonFile = JSON.parse(IOBuffer(res.data))
-  for ele in jsonFile
+  @parallel for ele in jsonFile
     try haskey(ele,"value")
       get_API(link,ele["value"],db)
     catch

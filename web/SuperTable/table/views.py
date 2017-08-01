@@ -36,9 +36,10 @@ def get_course(request):
             department = match[0]
             courseNum = match[1]
 
-            subRequest = SearchRequest(year, semester, preference, department, courseNum,courseTimes)
-            courseTimes = subRequest.courseTimes + 1
+            subRequest = SearchRequest(year, semester, preference, department, courseNum)
             rtnDict.update(subRequest.get_rtnVal())
+            courseTimes += subRequest.subTimes
+            
 
     return render(request, 'result.html', {"rtnDict":json.dumps(rtnDict).replace('"',r"\"")})
    
