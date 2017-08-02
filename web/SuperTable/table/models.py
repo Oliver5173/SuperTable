@@ -1,5 +1,6 @@
 from django.db import models
 from collections import OrderedDict
+import datetime
 import sqlite3
 import json
 
@@ -104,10 +105,12 @@ class SearchRequest(models.Model):
         if row["examDate"]:
             dateFormList =[part.strip() for part in row["examDate"].split(" ")]
             dateForm = dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + dateFormList[2]
+            examEndDate = dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + str(int(dateFormList[2]) + 1)
             finalRow["title"] = self.department.upper() + self.courseNum + " Final"
-            finalRow["ranges"] = [{"start":startDate,"end":endDate}]
-            finalRow["start"] = dateForm + "T" + row["examstartTime"] + ":00"
-            finalRow["end"] = dateForm + "T" + row["examEndTime"] + ":00"
+            finalRow["ranges"] = [{"start":dateForm,"end":examEndDate}]
+            finalRow["dow"] = [datetime.date(int(dateFormList[3]), int(self.parseMonth(dateFormList[1])),int(dateFormList[2])).isoweekday()]
+            finalRow["start"] = row["examstartTime"] + ":00"
+            finalRow["end"] = row["examEndTime"] + ":00"
             finalRow["backgroundColor"] =  "#FF4136"
             self.rtnDict[self.subTimes] = finalRow
             self.subTimes += 1
