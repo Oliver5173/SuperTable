@@ -60,7 +60,7 @@ class SearchRequest(models.Model):
 
     def parseDate(self, row, colName):
         dateFormList = [part.strip() for part in row[colName].split(" ")]
-        return dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + dateFormList[2] + "T"
+        return dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + dateFormList[2]
 
     def parseDictRow(self,row):
         classRow = {}
@@ -70,14 +70,10 @@ class SearchRequest(models.Model):
             classRow["title"] = self.department.upper() + self.courseNum + " " + row["section"]
             startDate = self.parseDate(row,"startDate")
             endDate = self.parseDate(row,"endDate")
-            # classRow["recurstart"] = startDate
-            # classRow["recurend"] = endDate
             classRow["start"] = row["startTime1"]
             classRow["end"] =  row["endTime1"]
-            # classRow["ranges"] = [{"start":"2017/03/01", "end":"2017/04/01"},]
+            classRow["ranges"] = [{"start":startDate,"end":endDate}]
             classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days1"].split(",")]
-            classRow["repeats"] = 1
-            classRow["repeat_freq"] = 7
             classRow["backgroundColor"] = self.backgroundColor(self.subTimes)
             self.rtnDict[self.subTimes] = classRow
             classRow = {}
@@ -85,11 +81,9 @@ class SearchRequest(models.Model):
 
             if row["startTime2"]:
                 classRow["title"] = self.department.upper() + self.courseNum + " "  + row["section"]
-                startDate = self.parseDate(row,"startDate")
-                endDate = self.parseDate(row,"endDate")
                 classRow["start"] = row["startTime2"]
                 classRow["end"] = row["endTime2"]
-                # classRow["ranges"] = [{"start":startDate,"end":endDate}]
+                classRow["ranges"] = [{"start":startDate,"end":endDate}]
                 classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days2"].split(",")]
                 classRow["backgroundColor"] = self.backgroundColor(self.subTimes-1)
                 self.rtnDict[self.subTimes] = classRow
@@ -98,11 +92,7 @@ class SearchRequest(models.Model):
 
                 if row["startTime3"]:
                     classRow["title"] = self.department.upper() + self.courseNum + " " + row["section"]
-                    startDate = self.parseDate(row,"startDate")
-                    endDate = self.parseDate(row,"endDate")
-                    classRow["recurstart"] = startDate
-                    classRow["recurend"] = endDate
-                    # classRow["ranges"] = [{"start":startDate,"end":endDate}]
+                    classRow["ranges"] = [{"start":startDate,"end":endDate}]
                     classRow["start"] = row["startTime3"]
                     classRow["end"] = row["endTime3"]
                     classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days3"].split(",")]
@@ -113,10 +103,11 @@ class SearchRequest(models.Model):
 
         if row["examDate"]:
             dateFormList =[part.strip() for part in row["examDate"].split(" ")]
-            dateForm = dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + dateFormList[2] + "T"
+            dateForm = dateFormList[3] + "-" + self.parseMonth(dateFormList[1]) +"-" + dateFormList[2]
             finalRow["title"] = self.department.upper() + self.courseNum + " Final"
-            finalRow["start"] = dateForm + row["examstartTime"] + ":00"
-            finalRow["end"] = dateForm + row["examEndTime"] + ":00"
+            finalRow["ranges"] = [{"start":startDate,"end":endDate}]
+            finalRow["start"] = dateForm + "T" + row["examstartTime"] + ":00"
+            finalRow["end"] = dateForm + "T" + row["examEndTime"] + ":00"
             finalRow["backgroundColor"] =  "#FF4136"
             self.rtnDict[self.subTimes] = finalRow
             self.subTimes += 1
