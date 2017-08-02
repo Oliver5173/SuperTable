@@ -15,13 +15,13 @@ function get_API(inputLink,key,db)
     courseInfo = split(info.courseName," ")
     tableName = string(lowercase(courseInfo[1]),"x")
     examDate = split(info.exam.startDate," ")
-    examstartTime = length(examDate) == 1 ? "NULL": info.exam.startTime
-    examEndTime = length(examDate) == 1 ? "NULL": info.exam.endTime
-    examDate = length(examDate) == 1 ? "NULL": string(examDate[1]," ",examDate[2]," ",examDate[3]," ",examDate[6])
+    examstartTime = length(examDate) == 1 ? NULL: info.exam.startTime
+    examEndTime = length(examDate) == 1 ? NULL: info.exam.endTime
+    examDate = length(examDate) == 1 ? NULL: string(examDate[1]," ",examDate[2]," ",examDate[3]," ",examDate[6])
     startDate = split(info.startDate," ")
-    startDate = length(startDate) == 1 ? "NULL": string(startDate[1]," ",startDate[2]," ",startDate[3]," ",startDate[6])
+    startDate = length(startDate) == 1 ? NULL: string(startDate[1]," ",startDate[2]," ",startDate[3]," ",startDate[6])
     endDate = split(info.endDate," ")
-    endDate = length(endDate) == 1 ? "NULL": string(endDate[1]," ",endDate[2]," ",endDate[3]," ",endDate[6])
+    endDate = length(endDate) == 1 ? NULL: string(endDate[1]," ",endDate[2]," ",endDate[3]," ",endDate[6])
     #=
     SQLite.query(db,"create table $(dep)(course TEXT,section TEXT,
                                          campus TEXT,sectionCode TEXT,

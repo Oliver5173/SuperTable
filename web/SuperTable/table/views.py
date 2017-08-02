@@ -29,17 +29,19 @@ def get_course(request):
         courseList = request.POST.get('courseList', None)
         preference = request.POST.get('preference', None)
         courseList = courseList.split(";")
-        rtnDict = {}
+        jsonDict = {}
         courseTimes = 0
         for course in courseList:
-            match = re.match(r'([a-z]+)([0-9]+)', course, re.I).groups()
+            # if course[-1] == "w":course=course[:-1]
+            match = re.match(r'([a-z]+)([0-9]+w*)', course, re.I).groups()
             department = match[0]
             courseNum = match[1]
 
-            subRequest = SearchRequest(year, semester, preference, department, courseNum)
-            rtnDict.update(subRequest.get_rtnVal())
-            courseTimes += subRequest.subTimes
+            subRequest = SearchRequest(year, semester, preference, department, courseNum,courseTimes)
+            jsonDict.update(subRequest.get_rtnVal())
+            courseTimes = subRequest.courseTimes
             
 
-    return render(request, 'result.html', {"rtnDict":json.dumps(rtnDict).replace('"',r"\"")})
+    return render(request, 'result.html', {"rtnDict":{"jsonDict":json.dumps(jsonDict).replace('"',r"\""),\
+                                                    "semester":semester, "year":year}})
    

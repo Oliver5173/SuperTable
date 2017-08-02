@@ -22,36 +22,40 @@ class SearchRequest(models.Model):
     def __str__(self):
         return self.department+str(self.courseNum) 
 
-    def __init__(self, year, semester, preference, department, courseNum):
+    def __init__(self, year, semester, preference, department, courseNum,courseTimes):
         self.year = year
         self.semester = semester
         self.preference = preference
         self.department = department
         self.courseNum = courseNum
+        self.courseTimes = courseTimes
         
         self.connectDB = None
         self.cursor = None
-        # self.rtnDict = OrderedDict()
         self.rtnDict = OrderedDict()
-        self.subTimes = 0
+        
 
     def searchFromDB(self):
         dbName = str(self.year) + self.semester.lower() + ".db"
         self.connectDB = sqlite3.connect(dbName)
         self.connectDB.row_factory = dict_factory
-        query = "SELECT * FROM " + (self.department+ "x") + " WHERE course=" + str(self.courseNum) + " AND sectionCode='LEC'"
-        self.cursor = self.connectDB.execute(query)
+        
+        if self.courseNum[-1] == "w":
+            self.courseNum = self.courseNum[:-1] + "W"
+
+        query = "SELECT * FROM " + (self.department+ "x") + " WHERE course=(?) AND sectionCode='LEC'"
+        self.cursor = self.connectDB.execute(query,(self.courseNum,))
     
     def parseMonth(self,abbr):
         monthDict = {"Jan":"01", "Feb":"02", "Mar":"03", "Apr":"04",
                     "May":"05", "June":"06", "July":"07", "Aug":"08",
-                    "Sept":"09", "Oct":"10", "Nov":"11", "Dec":"12",}
+                    "Sep":"09", "Oct":"10", "Nov":"11", "Dec":"12",}
         return monthDict[abbr]
 
     def parseWeekday(self, abbr):
         weekdayDict = {"Mo":1, "Tu":2,
                         "We":3, "Th":4,
-                        "Fr":5,}
+                        "Fr":5, "Sa":6, "Su":7}
         return weekdayDict[abbr]
 
     def backgroundColor(self, times):
@@ -75,10 +79,10 @@ class SearchRequest(models.Model):
             classRow["end"] =  row["endTime1"]
             classRow["ranges"] = [{"start":startDate,"end":endDate}]
             classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days1"].split(",")]
-            classRow["backgroundColor"] = self.backgroundColor(self.subTimes)
-            self.rtnDict[self.subTimes] = classRow
+            classRow["backgroundColor"] = self.backgroundColor(self.courseTimes)
+            self.rtnDict[self.courseTimes] = classRow
             classRow = {}
-            self.subTimes += 1
+            self.courseTimes += 1
 
             if row["startTime2"]:
                 classRow["title"] = self.department.upper() + self.courseNum + " "  + row["section"]
@@ -86,10 +90,10 @@ class SearchRequest(models.Model):
                 classRow["end"] = row["endTime2"]
                 classRow["ranges"] = [{"start":startDate,"end":endDate}]
                 classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days2"].split(",")]
-                classRow["backgroundColor"] = self.backgroundColor(self.subTimes-1)
-                self.rtnDict[self.subTimes] = classRow
+                classRow["backgroundColor"] = self.backgroundColor(self.courseTimes-1)
+                self.rtnDict[self.courseTimes] = classRow
                 classRow = {}
-                self.subTimes += 1
+                self.courseTimes += 1
 
                 if row["startTime3"]:
                     classRow["title"] = self.department.upper() + self.courseNum + " " + row["section"]
@@ -97,10 +101,10 @@ class SearchRequest(models.Model):
                     classRow["start"] = row["startTime3"]
                     classRow["end"] = row["endTime3"]
                     classRow["dow"] = [self.parseWeekday(day.strip()) for day in row["days3"].split(",")]
-                    classRow["backgroundColor"] = self.backgroundColor(self.subTimes-2)
-                    self.rtnDict[self.subTimes] = classRow
+                    classRow["backgroundColor"] = self.backgroundColor(self.courseTimes-2)
+                    self.rtnDict[self.courseTimes] = classRow
                     classRow = {}
-                    self.subTimes += 1
+                    self.courseTimes += 1
 
         if row["examDate"]:
             dateFormList =[part.strip() for part in row["examDate"].split(" ")]
@@ -112,8 +116,8 @@ class SearchRequest(models.Model):
             finalRow["start"] = row["examstartTime"] + ":00"
             finalRow["end"] = row["examEndTime"] + ":00"
             finalRow["backgroundColor"] =  "#FF4136"
-            self.rtnDict[self.subTimes] = finalRow
-            self.subTimes += 1
+            self.rtnDict[self.courseTimes] = finalRow
+            self.courseTimes += 1
 
 
     def filterPrefer(self):
@@ -137,7 +141,7 @@ class SearchRequest(models.Model):
         return self.rtnDict
 
     def get_courseTimes(self):
-        return self.subTimes
+        return self.courseTimes
 
         
 

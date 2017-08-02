@@ -11,11 +11,22 @@
 
 
 <script>
-    var rtnDict = JSON.parse("{{ rtnDict|safe}}");
+    var semesterStartDict = {
+        "Fall": "-09-03",
+        "Summer": "-05-07",
+        "Spring": "-01-03",
+    };
+
+    var jsonDict = JSON.parse("{{ rtnDict.jsonDict|safe}}");
     var eventsList = [];
 
-    for (var key in rtnDict) {
-        eventsList.push(rtnDict[key]);
+    var semester = "{{rtnDict.semester}}";
+    var year = "{{rtnDict.year}}";
+    var searchStartDate = year + semesterStartDict[semester];
+
+
+    for (var key in jsonDict) {
+        eventsList.push(jsonDict[key]);
     };
 
     var getEvents = function(start, end) {
@@ -27,6 +38,8 @@
         $('#calendar').fullCalendar({
             schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
             defaultView: 'agendaWeek',
+            "allDaySlot": false,
+            defaultDate: searchStartDate,
             header: {
                 left: 'prev,next today',
                 center: 'title',
@@ -36,7 +49,6 @@
             maxTime: '22:00:00',
             slotDuration: '00:30:00',
             navLinks: true, // can click day/week names to navigate views
-            editable: true,
             eventLimit: true, // allow "more" link when too many events
             eventRender: function(event) {
                 if (event.ranges) {
@@ -54,6 +66,7 @@
                 callback(events);
             },
         });
+        $('#calendar').css('font-size', '0.7em');
     });
 </script>
 
