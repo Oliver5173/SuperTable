@@ -28,8 +28,8 @@ SECRET_KEY = '&wz0a%_r$_=s(&bkct2ph2l79pqqwmcd@+yyxtnp2mhb$!h!ci'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ["supertable-alexli0717.c9users.io",""]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition
 
@@ -140,8 +140,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [
-    os.path.join(PROJECT_ROOT, 'static'),
-    os.path.join(BASE_DIR, "static"),
+    # os.path.join(PROJECT_ROOT, 'static'),
+    # os.path.join(BASE_DIR, "static"),
     os.path.join(APP_ROOT, "static"),
     os.path.join(BASE_DIR, "node_modules")
 ]
