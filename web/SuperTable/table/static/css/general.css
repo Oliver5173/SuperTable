@@ -66,3 +66,7 @@ body {
     float: none;
     margin: 0 auto;
 }
+
+#calendar {
+    height: auto!important;
+}

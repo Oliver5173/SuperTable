@@ -16,10 +16,10 @@
         "Summer": "-05-07",
         "Spring": "-01-03",
     };
+    var eventsList = [];
 
     if ("{{rtnDict}}") {
         var jsonDict = JSON.parse("{{ rtnDict.jsonDict|safe}}");
-        var eventsList = [];
 
         var semester = "{{rtnDict.semester}}";
         var year = "{{rtnDict.year}}";
@@ -33,14 +33,13 @@
         var getEvents = function(start, end) {
             return eventsList;
         }
-    } else {
-        eventsList = [];
     };
 
     $(document).ready(function() {
 
         $('#calendar').fullCalendar({
             schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
+            height: "auto",
             defaultView: 'agendaWeek',
             "allDaySlot": false,
             defaultDate: searchStartDate,
