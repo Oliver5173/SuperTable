@@ -28,7 +28,7 @@ SECRET_KEY = '&wz0a%_r$_=s(&bkct2ph2l79pqqwmcd@+yyxtnp2mhb$!h!ci'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["supertable-alexli0717.c9users.io",""]
+ALLOWED_HOSTS = ["supertable-alexli0717.c9users.io","*"]
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Application definition

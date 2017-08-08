@@ -24,6 +24,7 @@
   "dependencies": {
     "fullcalendar": "^3.4.0",
     "fullcalendar-scheduler": "^1.6.2",
+    "fullpage.js": "^2.9.4",
     "moment": "^2.18.1"
   }
 }
