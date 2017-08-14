@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 body {
-    background-color: #213852;
+    /* background-color: #213852; */
     height: 100%;
 }
 
@@ -15,6 +15,18 @@ body {
     font-size: 2em;
 }
 
+#section_search {
+    background-color: #009cdc!important;
+}
+
+#result {
+    background-color: white;
+}
+
+#section_result {
+    background-color: white;
+}
+
 #footer {
     /* height: 100px; */
     text-align: center;
@@ -23,6 +35,10 @@ body {
     bottom: 0;
     left: 0;
     padding: 1em;
+}
+
+#section_aboutus {
+    background-color: #26D9B9;
 }
 
 .support {

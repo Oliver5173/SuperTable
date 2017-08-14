@@ -7,17 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{% static 'pics/book.png'%}" type="image/x-icon" />
-    <link rel="stylesheet" type="text/css" href="{%static 'fullpage.js/dist/jquery.fullPage.css' %}" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.4/jquery.pagepiling.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/general.css' %}">
     <script src="{% static 'js/general.js' %}"></script>
-    <script type="text/javascript" src="{% static 'fullpage.js/dist/jquery.fullPage.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pagePiling.js/1.5.4/jquery.pagepiling.js"></script>
     <script>
         $(document).ready(function() {
-            $('#fullpage').fullpage();
+            $('#pagepiling').pagepiling();
+
         });
     </script>
 
@@ -25,11 +26,10 @@
 </head>
 
 <body>
-    <nav class="sidebar-nav--primary"> {% include "nav.html" %}
-    </nav>
-    <div id="fullpage">
+    <div id="pagepiling">
 
-        <div class="section">
+
+        <div class="section" id="section_search">
             <div class="container" id="main">
                 {% block content %}
                 <div>Default content</div>
@@ -37,14 +37,16 @@
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="section_result">
             <div class="container" id="result">
                 {% include "result.html" %}
             </div>
         </div>
 
-        <div class="section" id="footer">
-            {% include "footer.html" %}
+        <div class="section" id="section_aboutus">
+            <div class="container" id="footer">
+                {% include "footer.html" %}
+            </div>
         </div>
     </div>
 </body>
