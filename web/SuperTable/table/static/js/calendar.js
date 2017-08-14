@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    var rtnDict = "{{ rtnDict}}";
     $('#calendar').fullCalendar({
         schedulerLicenseKey: 'CC-Attribution-NonCommercial-NoDerivatives',
         defaultView: 'agendaWeek',
@@ -14,7 +13,6 @@ $(document).ready(function() {
         navLinks: true, // can click day/week names to navigate views
         editable: true,
         eventLimit: true, // allow "more" link when too many events
-        rtnDict
     });
 
 });

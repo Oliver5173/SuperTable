@@ -1,21 +1,6 @@
 {% load staticfiles %}
-<div class="container">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        <a class="navbar-brand" rel="home" href="{% url 'home' %}" title="SuperTable">
-            <img style="max-width:100px; margin-top: -7px;" src="{% static 'pics/book.png'%}">
-        </a>
-    </div>
-    <div id="navbar" class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-            <li id="bandName">
-                SuperClass
-            </li>
-        </ul>
-    </div>
-</div>
+<ul id="menu">
+    <li data-menuanchor="Add_Courses" class="active"><a href="#Add_Courses">Add Courses</a></li>
+    <li data-menuanchor="Time_Table"><a href="#Time_Table">Time Table</a></li>
+    <li data-menuanchor="About_us"><a href="#About_us">About us</a></li>
+</ul>
