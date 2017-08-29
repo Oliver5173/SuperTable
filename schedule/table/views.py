@@ -12,12 +12,14 @@ from django.views.decorators.csrf import csrf_protect
 def index(request):
     if request.method == "POST":
         form = courseForm(request.POST)
+        info = {}
         if form.is_valid():
-            info = {}
             info["year"] = form.cleaned_data["year"]
             info["semester"] = form.cleaned_data["semester"]
             info["content"] = form.cleaned_data["content"]
-            return render(request,"index.html",info)
+        else:
+            info["void"] = True
+        return render(request,"index.html",info)
     else:
         return render(request,"index.html")
     
