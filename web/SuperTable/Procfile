@@ -1,0 +1,1 @@
+web: gunicorn playmonster.wsgi --log-file -

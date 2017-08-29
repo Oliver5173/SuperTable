@@ -1,0 +1,88 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
+body {
+    /* background-color: #213852; */
+    height: 100%;
+}
+
+#bandName {
+    font-family: Bradley Hand ITC;
+    color: white;
+    font-size: 400%;
+}
+
+#main {
+    margin-top: 5em;
+    font-size: 2em;
+}
+
+#section_search {
+    background-color: #009cdc!important;
+}
+
+#result {
+    background-color: white;
+}
+
+#section_result {
+    background-color: white;
+}
+
+#footer {
+    /* height: 100px; */
+    text-align: center;
+    color: #fff;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1em;
+}
+
+#section_aboutus {
+    background-color: #26D9B9;
+}
+
+.support {
+    right: 0;
+    bottom: 0;
+    height: calc(30vh);
+    color: white;
+    font-family: raleway;
+}
+
+.content {
+    border-radius: 8px;
+    color: white;
+    border: 5px;
+    border: 0.01em solid white;
+}
+
+#pinkRed {
+    background-color: #EF476F;
+}
+
+#dailyUpdate {
+    background-color: #E2A639;
+}
+
+#darkBlue {
+    background-color: #1189B1;
+}
+
+#donation {
+    background-color: #06C593;
+}
+
+#search {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.col-centered {
+    float: none;
+    margin: 0 auto;
+}
+
+#calendar {
+    height: auto!important;
+}

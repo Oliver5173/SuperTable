@@ -1,0 +1,30 @@
+{
+  "name": "super_course",
+  "version": "1.0.0",
+  "description": "webapplication for optimize course sche",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oliver5173/SuperTable.git"
+  },
+  "keywords": [
+    "schedule;",
+    "webapp;",
+    "django"
+  ],
+  "author": "Alex Li & Oliver Wei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oliver5173/SuperTable/issues"
+  },
+  "homepage": "https://github.com/Oliver5173/SuperTable#readme",
+  "dependencies": {
+    "fullcalendar": "^3.4.0",
+    "fullcalendar-scheduler": "^1.6.2",
+    "fullpage.js": "^2.9.4",
+    "moment": "^2.18.1"
+  }
+}
